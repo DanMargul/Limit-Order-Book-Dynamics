@@ -2,6 +2,7 @@ from lobd.cash import Cash
 from lobd.market_maker import MarketMaker, Quote
 from lobd.order import Order, OrderType, Side, TimeInForce
 from lobd.price import PriceProcess
+from lobd.price_level import PriceLevel
 from lobd.simulation import Simulation
 from lobd.trade import Trade
 from lobd.trader import Action, MarketState, Trader
@@ -14,6 +15,7 @@ __all__ = [
     "MarketState",
     "Order",
     "OrderType",
+    "PriceLevel",
     "PriceProcess",
     "Quote",
     "Side",
