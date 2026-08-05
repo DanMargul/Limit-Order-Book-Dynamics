@@ -4,6 +4,7 @@ from lobd.price import PriceProcess
 from lobd.simulation import Simulation
 from lobd.trade import Trade
 from lobd.trader import Action, MarketState, Trader
+from lobd.valuation import Valuation
 
 __all__ = [
     "Action",
@@ -15,4 +16,5 @@ __all__ = [
     "Simulation",
     "Trade",
     "Trader",
+    "Valuation",
 ]
