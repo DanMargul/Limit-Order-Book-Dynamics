@@ -1,5 +1,6 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
+from lobd.inventory import Inventory
 from lobd.price import PriceProcess
 from lobd.trade import Trade
 from lobd.trader import Action
@@ -21,7 +22,7 @@ class Quote:
 @dataclass(slots=True)
 class MarketMaker:
     half_spread: float
-
+    inventory: Inventory = field(default_factory=Inventory)
 
     def quote(self, process: PriceProcess) -> Quote:
         return Quote(
@@ -36,6 +37,8 @@ class MarketMaker:
             quantity: float,
     ) -> Trade | None:
         if action is Action.BUY:
+            self.inventory.sell(quantity)
+
             return Trade(
                 price=quote.ask,
                 quantity=quantity,
@@ -43,6 +46,8 @@ class MarketMaker:
             )
 
         if action is Action.SELL:
+            self.inventory.buy(quantity)
+
             return Trade(
                 price=quote.bid,
                 quantity=quantity,
