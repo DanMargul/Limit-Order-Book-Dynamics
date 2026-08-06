@@ -23,6 +23,18 @@ class OrderBook:
 
         level.add(order)
 
+    def remove(self, order: Order) -> None:
+        if order.limit_price is None:
+            raise ValueError("Market orders are never stored in the order book.")
+
+        levels = self.bids if order.side is Side.BUY else self.asks
+
+        level = levels[order.limit_price]
+        level.remove(order)
+
+        if not level:
+            del levels[order.limit_price]
+
     @property
     def best_bid(self) -> PriceLevel | None:
         if not self.bids:
